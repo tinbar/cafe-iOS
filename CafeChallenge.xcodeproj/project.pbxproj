@@ -45,6 +45,7 @@
 		D6416CE31C65F5190052D9A5 /* CafeChallengeContact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CafeChallengeContact+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D6416CE41C65F5190052D9A5 /* CafeChallengeContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeChallengeContact.swift; sourceTree = "<group>"; };
 		D6416CE91C65FEE70052D9A5 /* EditContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditContactTableViewController.swift; sourceTree = "<group>"; };
+		D6734D3F1C662832002653D1 /* CafeChallenge-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CafeChallenge-Bridging-Header.h"; sourceTree = "<group>"; };
 		D6D2BB581C65CCE000C92F48 /* CafeChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CafeChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D2BB5B1C65CCE000C92F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6D2BB601C65CCE000C92F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				D6416CE31C65F5190052D9A5 /* CafeChallengeContact+CoreDataProperties.swift */,
+				D6734D3F1C662832002653D1 /* CafeChallenge-Bridging-Header.h */,
 				D6416CE41C65F5190052D9A5 /* CafeChallengeContact.swift */,
 				D6D2BB5B1C65CCE000C92F48 /* AppDelegate.swift */,
 				D6D2BB8C1C65CD6800C92F48 /* ContactTableViewController.swift */,
@@ -493,6 +495,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Codex.CafeChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "CafeChallenge/CafeChallenge-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -505,6 +509,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Codex.CafeChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "CafeChallenge/CafeChallenge-Bridging-Header.h";
 			};
 			name = Release;
 		};

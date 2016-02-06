@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Alamofire
+import MBProgressHUD
 
 class ContactTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
@@ -34,13 +35,6 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
         self.tableView.tableFooterView = UIView.init(frame: CGRectZero)
         // self.navigationItem.rightBarButtonItem = nil
         self.navigationItem.leftBarButtonItem = self.loginButton
-        
-        /*
-        let entity = NSEntityDescription.entityForName("Contact", inManagedObjectContext: self.managedObjectContext)
-        let record = CafeChallengeContact(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext)
-        let infoDict: [String : String] = ["first_name":"Jane" , "last_name":"Smith", "email":"jane@smith.com", "phone_number":"343"]
-        record .updateWithDictionary(infoDict, inManagedObjectContext: self.managedObjectContext)
-        */
         }
     
     override func viewWillAppear(animated: Bool) {
@@ -150,6 +144,13 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
     }
     
     func insertRandomContact() {
+        // Remove view if being pressed while previous fetch is taking place
+        MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+        // Add loading bar
+        let loadingNotification = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        loadingNotification.mode = MBProgressHUDMode.Indeterminate
+        loadingNotification.labelText = "Fetching random user ... "
+        // Make JSON request, parse data and insert contact
         Alamofire.request(.GET, "https://randomuser.me/api/")
             .responseJSON { response in switch response.result {
             case .Success(let JSON):
@@ -176,6 +177,8 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
             case .Failure(let error):
                 print("Error: \(error)")
             }
+            // Remove progressbar
+            MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
         }
 
     }
