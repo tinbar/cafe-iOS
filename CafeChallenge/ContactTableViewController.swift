@@ -107,7 +107,7 @@ class ContactTableViewController: UITableViewController {
     
     // MARK: - Button Selectors
     func loginButtonTapped(sender: UIBarButtonItem) {
-        print("login button tapped")
+        print("login button tapped yes!")
     }
     
     // MARK: - IBActions
