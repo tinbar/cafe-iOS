@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 class ContactTableViewController: UITableViewController {
     
     @IBOutlet weak var addRandomContactButton: UIBarButtonItem!
     @IBOutlet weak var addCustomContactButton: UIBarButtonItem!
     var loginButton: UIBarButtonItem!
+    
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +34,26 @@ class ContactTableViewController: UITableViewController {
         self.tableView.tableFooterView = UIView.init(frame: CGRectZero)
         // self.navigationItem.rightBarButtonItem = nil
         self.navigationItem.leftBarButtonItem = self.loginButton
+        
+        /*
+        let entity = NSEntityDescription.entityForName("Contact", inManagedObjectContext: self.managedObjectContext)
+        let record = CafeChallengeContact(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext)
+        let infoDict: [String : String] = ["first_name":"Jane" , "last_name":"Smith", "email":"jane@smith.com", "phone_number":"343"]
+        record .updateWithDictionary(infoDict, inManagedObjectContext: self.managedObjectContext)
+        */
+        let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entityForName("Contact", inManagedObjectContext: self.managedObjectContext)
+        fetchRequest.entity = entityDescription
+        do {
+            let result = try self.managedObjectContext.executeFetchRequest(fetchRequest)
+            for object in result {
+                let contact = object as! CafeChallengeContact
+                print(contact.first_name)
+            }
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
     }
 
     override func didReceiveMemoryWarning() {

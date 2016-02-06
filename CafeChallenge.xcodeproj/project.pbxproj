@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FCCF97AFC03E91921AC6F80 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0523DD32CD57DCA666A58C68 /* Pods.framework */; };
+		D6416CE51C65F5190052D9A5 /* CafeChallengeContact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6416CE31C65F5190052D9A5 /* CafeChallengeContact+CoreDataProperties.swift */; };
+		D6416CE61C65F5190052D9A5 /* CafeChallengeContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6416CE41C65F5190052D9A5 /* CafeChallengeContact.swift */; };
 		D6D2BB5C1C65CCE000C92F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2BB5B1C65CCE000C92F48 /* AppDelegate.swift */; };
 		D6D2BB611C65CCE000C92F48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6D2BB5F1C65CCE000C92F48 /* Main.storyboard */; };
 		D6D2BB641C65CCE000C92F48 /* CafeChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D6D2BB621C65CCE000C92F48 /* CafeChallenge.xcdatamodeld */; };
@@ -35,6 +38,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0523DD32CD57DCA666A58C68 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0530DC1F4E54D03DFD19AAC7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B46E7D3E18986F3280343508 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D6416CE31C65F5190052D9A5 /* CafeChallengeContact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CafeChallengeContact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D6416CE41C65F5190052D9A5 /* CafeChallengeContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeChallengeContact.swift; sourceTree = "<group>"; };
 		D6D2BB581C65CCE000C92F48 /* CafeChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CafeChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D2BB5B1C65CCE000C92F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6D2BB601C65CCE000C92F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FCCF97AFC03E91921AC6F80 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +85,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		98FB91638D28BAF94FD85746 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B46E7D3E18986F3280343508 /* Pods.debug.xcconfig */,
+				0530DC1F4E54D03DFD19AAC7 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9F563281CFFBDD30E268C1D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0523DD32CD57DCA666A58C68 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D6D2BB4F1C65CCE000C92F48 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +109,8 @@
 				D6D2BB721C65CCE000C92F48 /* CafeChallengeTests */,
 				D6D2BB7D1C65CCE000C92F48 /* CafeChallengeUITests */,
 				D6D2BB591C65CCE000C92F48 /* Products */,
+				98FB91638D28BAF94FD85746 /* Pods */,
+				9F563281CFFBDD30E268C1D0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +127,8 @@
 		D6D2BB5A1C65CCE000C92F48 /* CafeChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				D6416CE31C65F5190052D9A5 /* CafeChallengeContact+CoreDataProperties.swift */,
+				D6416CE41C65F5190052D9A5 /* CafeChallengeContact.swift */,
 				D6D2BB5B1C65CCE000C92F48 /* AppDelegate.swift */,
 				D6D2BB8C1C65CD6800C92F48 /* ContactTableViewController.swift */,
 				D6D2BB5F1C65CCE000C92F48 /* Main.storyboard */,
@@ -135,9 +165,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D6D2BB831C65CCE000C92F48 /* Build configuration list for PBXNativeTarget "CafeChallenge" */;
 			buildPhases = (
+				1E22182E5CA890402094D7F8 /* Check Pods Manifest.lock */,
 				D6D2BB541C65CCE000C92F48 /* Sources */,
 				D6D2BB551C65CCE000C92F48 /* Frameworks */,
 				D6D2BB561C65CCE000C92F48 /* Resources */,
+				F70C2616E4294EB718C0D202 /* Embed Pods Frameworks */,
+				C72921BFC27328C7AE458E9A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -254,13 +287,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1E22182E5CA890402094D7F8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C72921BFC27328C7AE458E9A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F70C2616E4294EB718C0D202 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D6D2BB541C65CCE000C92F48 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D6D2BB641C65CCE000C92F48 /* CafeChallenge.xcdatamodeld in Sources */,
+				D6416CE51C65F5190052D9A5 /* CafeChallengeContact+CoreDataProperties.swift in Sources */,
 				D6D2BB5C1C65CCE000C92F48 /* AppDelegate.swift in Sources */,
+				D6416CE61C65F5190052D9A5 /* CafeChallengeContact.swift in Sources */,
 				D6D2BB8D1C65CD6800C92F48 /* ContactTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +482,7 @@
 		};
 		D6D2BB841C65CCE000C92F48 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B46E7D3E18986F3280343508 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CafeChallenge/Info.plist;
@@ -410,6 +494,7 @@
 		};
 		D6D2BB851C65CCE000C92F48 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0530DC1F4E54D03DFD19AAC7 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CafeChallenge/Info.plist;
@@ -486,6 +571,7 @@
 				D6D2BB851C65CCE000C92F48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D6D2BB861C65CCE000C92F48 /* Build configuration list for PBXNativeTarget "CafeChallengeTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +580,7 @@
 				D6D2BB881C65CCE000C92F48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D6D2BB891C65CCE000C92F48 /* Build configuration list for PBXNativeTarget "CafeChallengeUITests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +589,7 @@
 				D6D2BB8B1C65CCE000C92F48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

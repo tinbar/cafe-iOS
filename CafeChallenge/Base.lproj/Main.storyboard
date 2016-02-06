@@ -39,6 +39,9 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="EfO-lZ-OdN" kind="show" id="QSA-xT-hwr"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -51,6 +54,7 @@
                             <barButtonItem style="plain" systemItem="add" id="7UQ-KJ-MzY">
                                 <connections>
                                     <action selector="customButtonTapped:" destination="foR-3D-SyC" id="5OA-c9-9w0"/>
+                                    <segue destination="EfO-lZ-OdN" kind="show" id="wbQ-8c-U4m"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="question" style="plain" id="sM9-mk-IjL">
@@ -68,6 +72,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYa-mN-nsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1627" y="1449"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="b27-VB-YPI">
+            <objects>
+                <tableViewController id="EfO-lZ-OdN" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="jwZ-Dp-PRt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oy3-mN-8Ta">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oy3-mN-8Ta" id="G8N-l5-ATj">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="EfO-lZ-OdN" id="4F5-Rh-jrk"/>
+                            <outlet property="delegate" destination="EfO-lZ-OdN" id="2eF-Wr-gzk"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V47-9W-Ttl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2415" y="1449"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Bxd-O6-vCR">
@@ -91,4 +123,7 @@
     <resources>
         <image name="question" width="20" height="20"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="QSA-xT-hwr"/>
+    </inferredMetricsTieBreakers>
 </document>
