@@ -34,8 +34,4 @@ class CafeChallengeContact: NSManagedObject {
             }
         }
     }
-    
-    func updateWithRandomUserInfo() {
-        // get from random user, re make dict and call self.updateWithDic or set directly here
-    }
 }

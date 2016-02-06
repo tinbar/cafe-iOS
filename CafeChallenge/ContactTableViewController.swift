@@ -20,7 +20,6 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        insertRandomContact()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -147,7 +146,7 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
     // MARK: - IBActions
     
     @IBAction func randomButtonTapped(sender: UIBarButtonItem) {
-        print("pressed")
+        insertRandomContact()
     }
     
     func insertRandomContact() {
