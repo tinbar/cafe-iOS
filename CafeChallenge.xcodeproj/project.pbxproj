@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		D6D2BB5C1C65CCE000C92F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2BB5B1C65CCE000C92F48 /* AppDelegate.swift */; };
-		D6D2BB5E1C65CCE000C92F48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2BB5D1C65CCE000C92F48 /* ViewController.swift */; };
 		D6D2BB611C65CCE000C92F48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6D2BB5F1C65CCE000C92F48 /* Main.storyboard */; };
 		D6D2BB641C65CCE000C92F48 /* CafeChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D6D2BB621C65CCE000C92F48 /* CafeChallenge.xcdatamodeld */; };
 		D6D2BB661C65CCE000C92F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6D2BB651C65CCE000C92F48 /* Assets.xcassets */; };
 		D6D2BB691C65CCE000C92F48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6D2BB671C65CCE000C92F48 /* LaunchScreen.storyboard */; };
 		D6D2BB741C65CCE000C92F48 /* CafeChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2BB731C65CCE000C92F48 /* CafeChallengeTests.swift */; };
 		D6D2BB7F1C65CCE000C92F48 /* CafeChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2BB7E1C65CCE000C92F48 /* CafeChallengeUITests.swift */; };
+		D6D2BB8D1C65CD6800C92F48 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2BB8C1C65CD6800C92F48 /* ContactTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +37,6 @@
 /* Begin PBXFileReference section */
 		D6D2BB581C65CCE000C92F48 /* CafeChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CafeChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D2BB5B1C65CCE000C92F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D6D2BB5D1C65CCE000C92F48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D6D2BB601C65CCE000C92F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D6D2BB631C65CCE000C92F48 /* CafeChallenge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CafeChallenge.xcdatamodel; sourceTree = "<group>"; };
 		D6D2BB651C65CCE000C92F48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		D6D2BB7A1C65CCE000C92F48 /* CafeChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CafeChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D2BB7E1C65CCE000C92F48 /* CafeChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeChallengeUITests.swift; sourceTree = "<group>"; };
 		D6D2BB801C65CCE000C92F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6D2BB8C1C65CD6800C92F48 /* ContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				D6D2BB5B1C65CCE000C92F48 /* AppDelegate.swift */,
-				D6D2BB5D1C65CCE000C92F48 /* ViewController.swift */,
+				D6D2BB8C1C65CD6800C92F48 /* ContactTableViewController.swift */,
 				D6D2BB5F1C65CCE000C92F48 /* Main.storyboard */,
 				D6D2BB651C65CCE000C92F48 /* Assets.xcassets */,
 				D6D2BB671C65CCE000C92F48 /* LaunchScreen.storyboard */,
@@ -260,8 +260,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6D2BB641C65CCE000C92F48 /* CafeChallenge.xcdatamodeld in Sources */,
-				D6D2BB5E1C65CCE000C92F48 /* ViewController.swift in Sources */,
 				D6D2BB5C1C65CCE000C92F48 /* AppDelegate.swift in Sources */,
+				D6D2BB8D1C65CD6800C92F48 /* ContactTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
