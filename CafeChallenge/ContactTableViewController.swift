@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ContactTableViewController: UITableViewController {
+class ContactTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var addRandomContactButton: UIBarButtonItem!
     @IBOutlet weak var addCustomContactButton: UIBarButtonItem!
@@ -41,6 +41,11 @@ class ContactTableViewController: UITableViewController {
         let infoDict: [String : String] = ["first_name":"Jane" , "last_name":"Smith", "email":"jane@smith.com", "phone_number":"343"]
         record .updateWithDictionary(infoDict, inManagedObjectContext: self.managedObjectContext)
         */
+        }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
         let fetchRequest = NSFetchRequest()
         let entityDescription = NSEntityDescription.entityForName("Contact", inManagedObjectContext: self.managedObjectContext)
         fetchRequest.entity = entityDescription
@@ -55,11 +60,6 @@ class ContactTableViewController: UITableViewController {
             print(fetchError)
         }
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,24 +70,29 @@ class ContactTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return self.fetchedResultsController.sections?.count ?? 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        return sectionInfo.numberOfObjects
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("contactCellIdentifier", forIndexPath: indexPath)
-        cell.textLabel!.text = "Jim"
-        cell.detailTextLabel!.text = "bob"
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        configureCell(cell, atIndexPath: indexPath)
         return cell
     }
     
-
+    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        cell.textLabel!.text = object.valueForKey("first_name")!.description
+        cell.detailTextLabel!.text = object.valueForKey("phone_number")!.description
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -146,6 +151,78 @@ class ContactTableViewController: UITableViewController {
     
     @IBAction func customButtonTapped(sender: UIBarButtonItem) {
         print("custom pressed")
+    }
+    
+    // MARK: - Fetched results controller
+    
+    var fetchedResultsController: NSFetchedResultsController {
+        if _fetchedResultsController != nil {
+            return _fetchedResultsController!
+        }
+        
+        let fetchRequest = NSFetchRequest()
+        // Edit the entity name as appropriate.
+        let entity = NSEntityDescription.entityForName("Contact", inManagedObjectContext: self.managedObjectContext)
+        fetchRequest.entity = entity
+        
+        // Set the batch size to a suitable number.
+        fetchRequest.fetchBatchSize = 20
+        
+        // Edit the sort key as appropriate.
+        let sortDescriptor = NSSortDescriptor(key: "first_name", ascending: true)
+        
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: "Master")
+        aFetchedResultsController.delegate = self
+        _fetchedResultsController = aFetchedResultsController
+        
+        do {
+            try _fetchedResultsController!.performFetch()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //print("Unresolved error \(error), \(error.userInfo)")
+            abort()
+        }
+        
+        return _fetchedResultsController!
+    }
+    var _fetchedResultsController: NSFetchedResultsController? = nil
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        switch type {
+        case .Insert:
+            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .Delete:
+            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        default:
+            return
+        }
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .Update:
+            self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
+        case .Move:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.endUpdates()
     }
 
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class EditContactTableViewController: UITableViewController, UITextFieldDelegate {
     
@@ -164,6 +165,15 @@ class EditContactTableViewController: UITableViewController, UITextFieldDelegate
         // verify valid data
         if verifyTextFieldData() {
             // save data
+            let entity = NSEntityDescription.entityForName("Contact", inManagedObjectContext: self.managedObjectContext)
+            let record = CafeChallengeContact(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext)
+            let infoDict: [String : String] = [
+                "first_name":self.firstNameTextField.text!,
+                "last_name":self.lastNameTextField.text!,
+                "email":self.emailTextField.text!,
+                "phone_number":self.phoneNumberTextField.text!
+            ]
+            record .updateWithDictionary(infoDict, inManagedObjectContext: self.managedObjectContext)
         }
         // finally, pop back to root
         navigationController!.popToRootViewControllerAnimated(true)
