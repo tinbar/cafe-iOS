@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Alamofire
 
 class ContactTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
@@ -19,7 +20,7 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        insertRandomContact()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -147,6 +148,37 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
     
     @IBAction func randomButtonTapped(sender: UIBarButtonItem) {
         print("pressed")
+    }
+    
+    func insertRandomContact() {
+        Alamofire.request(.GET, "https://randomuser.me/api/")
+            .responseJSON { response in switch response.result {
+            case .Success(let JSON):
+                let response = JSON as! NSDictionary
+                let results = response.objectForKey("results") as! NSArray
+                let user = results.objectAtIndex(0) as! NSDictionary
+                let userDict = user.objectForKey("user") as! NSDictionary
+                let fullName = userDict.objectForKey("name") as! NSDictionary
+                let firstName = fullName.objectForKey("first") as! String
+                let lastName = fullName.objectForKey(("last")) as! String
+                let email = userDict.objectForKey("email") as! String
+                let phoneNumber = userDict.objectForKey("phone") as! String
+                
+                let entity = NSEntityDescription.entityForName("Contact", inManagedObjectContext: self.managedObjectContext)
+                let record = CafeChallengeContact(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext)
+                let infoDict: [String : String] = [
+                    "first_name":firstName,
+                    "last_name":lastName,
+                    "email":email,
+                    "phone_number":phoneNumber
+                ]
+                record .updateWithDictionary(infoDict, inManagedObjectContext: self.managedObjectContext)
+                
+            case .Failure(let error):
+                print("Error: \(error)")
+            }
+        }
+
     }
     
     @IBAction func customButtonTapped(sender: UIBarButtonItem) {
