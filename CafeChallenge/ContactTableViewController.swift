@@ -25,7 +25,7 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
         self.loginButton = UIBarButtonItem.init(title: "Login", style: UIBarButtonItemStyle.Plain, target: self, action: "loginButtonTapped:")
         
@@ -34,12 +34,13 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
         // Set the footer to zero to remove extra lines from table view
         self.tableView.tableFooterView = UIView.init(frame: CGRectZero)
         // self.navigationItem.rightBarButtonItem = nil
-        self.navigationItem.leftBarButtonItem = self.loginButton
+        // self.navigationItem.leftBarButtonItem = self.loginButton
         }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        /*
         let fetchRequest = NSFetchRequest()
         let entityDescription = NSEntityDescription.entityForName("Contact", inManagedObjectContext: self.managedObjectContext)
         fetchRequest.entity = entityDescription
@@ -53,6 +54,7 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
             let fetchError = error as NSError
             print(fetchError)
         }
+        */
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,30 +84,34 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-        cell.textLabel!.text = object.valueForKey("first_name")!.description
+        cell.textLabel!.text = "\(object.valueForKey("first_name")!.description) \(object.valueForKey("last_name")!)"
         cell.detailTextLabel!.text = object.valueForKey("phone_number")!.description
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
     }
     
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
-
-    /*
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
+            let contact = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CafeChallengeContact
+            contact.deleteSelf(self.managedObjectContext)
+            
+            // tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+        /*
+        else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
+        */
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -122,19 +128,29 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let segueID = segue.identifier {
+            switch segueID {
+            case "editContactSegue":
+                let indexPath = self.tableView.indexPathForSelectedRow!
+                let contact = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CafeChallengeContact
+                let editContactViewController = segue.destinationViewController as! EditContactTableViewController
+                editContactViewController.prepareContactFromSegue(contact)
+            default:
+                break
+            }
+        }
     }
-    */
+    
     
     // MARK: - Button Selectors
     func loginButtonTapped(sender: UIBarButtonItem) {
-        print("login button tapped yes!")
     }
     
     // MARK: - IBActions
@@ -184,7 +200,6 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
     }
     
     @IBAction func customButtonTapped(sender: UIBarButtonItem) {
-        print("custom pressed")
     }
     
     // MARK: - Fetched results controller

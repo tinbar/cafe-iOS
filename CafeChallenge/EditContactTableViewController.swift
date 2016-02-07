@@ -16,6 +16,8 @@ class EditContactTableViewController: UITableViewController, UITextFieldDelegate
     var emailTextField: UITextField!
     var phoneNumberTextField: UITextField!
     
+    var editContact: CafeChallengeContact!
+    
     var doneButton: UIBarButtonItem!
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
@@ -30,7 +32,6 @@ class EditContactTableViewController: UITableViewController, UITextFieldDelegate
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.title = "Edit/Insert Contact"
         self.doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "doneButtonTapped:")
         self.navigationItem.rightBarButtonItem = self.doneButton
         self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "reuseIdentifier")
@@ -51,6 +52,18 @@ class EditContactTableViewController: UITableViewController, UITextFieldDelegate
         self.phoneNumberTextField.keyboardType = .DecimalPad
         self.phoneNumberTextField.delegate = self
         self.phoneNumberTextField.placeholder = "Ex: 0123456789"
+        
+        // if edit contact was passed, populate fields
+        if (editContact != nil) {
+            self.title = "Edit Contact"
+            self.firstNameTextField.text = editContact.first_name!
+            self.lastNameTextField.text = editContact.last_name
+            self.emailTextField.text = editContact.email
+            self.phoneNumberTextField.text = editContact.phone_number
+        }
+        else {
+            self.title = "Insert Contact"
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -164,16 +177,21 @@ class EditContactTableViewController: UITableViewController, UITextFieldDelegate
     func doneButtonTapped(sender: UIBarButtonItem) {
         // verify valid data
         if verifyTextFieldData() {
-            // save data
             let entity = NSEntityDescription.entityForName("Contact", inManagedObjectContext: self.managedObjectContext)
-            let record = CafeChallengeContact(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext)
+            var contact: CafeChallengeContact
+            if editContact != nil {
+                contact = editContact
+            }
+            else {
+                contact = CafeChallengeContact(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext)
+            }
             let infoDict: [String : String] = [
                 "first_name":self.firstNameTextField.text!,
                 "last_name":self.lastNameTextField.text!,
                 "email":self.emailTextField.text!,
                 "phone_number":self.phoneNumberTextField.text!
             ]
-            record .updateWithDictionary(infoDict, inManagedObjectContext: self.managedObjectContext)
+            contact.updateWithDictionary(infoDict, inManagedObjectContext: self.managedObjectContext)
         }
         // finally, pop back to root
         navigationController!.popToRootViewControllerAnimated(true)
@@ -190,5 +208,15 @@ class EditContactTableViewController: UITableViewController, UITextFieldDelegate
             return true
         }
         return false
+    }
+    
+    func prepareContactFromSegue(contact: CafeChallengeContact) {
+        self.editContact = contact
+        /*
+        self.firstNameTextField.text = contact.first_name!
+        self.lastNameTextField.text = contact.last_name
+        self.emailTextField.text = contact.email
+        self.phoneNumberTextField.text = contact.phone_number
+        */
     }
 }

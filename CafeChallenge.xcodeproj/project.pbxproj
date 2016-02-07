@@ -131,7 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				D6416CE31C65F5190052D9A5 /* CafeChallengeContact+CoreDataProperties.swift */,
-				D6734D3F1C662832002653D1 /* CafeChallenge-Bridging-Header.h */,
 				D6416CE41C65F5190052D9A5 /* CafeChallengeContact.swift */,
 				D6D2BB5B1C65CCE000C92F48 /* AppDelegate.swift */,
 				D6D2BB8C1C65CD6800C92F48 /* ContactTableViewController.swift */,
@@ -139,6 +138,7 @@
 				D6D2BB5F1C65CCE000C92F48 /* Main.storyboard */,
 				D6D2BB651C65CCE000C92F48 /* Assets.xcassets */,
 				D6D2BB671C65CCE000C92F48 /* LaunchScreen.storyboard */,
+				D6734D3F1C662832002653D1 /* CafeChallenge-Bridging-Header.h */,
 				D6D2BB6A1C65CCE000C92F48 /* Info.plist */,
 				D6D2BB621C65CCE000C92F48 /* CafeChallenge.xcdatamodeld */,
 			);
