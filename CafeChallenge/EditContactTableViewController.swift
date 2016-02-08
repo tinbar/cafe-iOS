@@ -182,7 +182,7 @@ class EditContactTableViewController: UITableViewController, UITextFieldDelegate
             // Update and save contact
             contact.updateWithDictionary(infoDict, inManagedObjectContext: self.managedObjectContext)
         }
-        // finally, pop back to root
+        // finally, pop back to root regardless of contact being added with validated data or not
         navigationController!.popToRootViewControllerAnimated(true)
     }
     
