@@ -18,6 +18,7 @@ class CafeChallengeContact: NSManagedObject {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
     
+    // Update the contact object with information for contact
     func updateWithDictionary(infoDict: Dictionary<String, String>, inManagedObjectContext managedObjectContext: NSManagedObjectContext) {
         for (contactKey, contactValue) in infoDict {
             self.setValue(contactValue, forKey: contactKey)
@@ -27,11 +28,13 @@ class CafeChallengeContact: NSManagedObject {
         }
     }
     
+    // Delete self
     func deleteSelf(context: NSManagedObjectContext) {
         context.deleteObject(self)
         saveContext(context)
     }
     
+    // Save context after create/edit, delete
     func saveContext(context: NSManagedObjectContext) {
         do {
             try context.save()
