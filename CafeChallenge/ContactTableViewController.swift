@@ -13,48 +13,40 @@ import MBProgressHUD
 
 class ContactTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
+    // Button to pull and add a random user from randomuser.me
     @IBOutlet weak var addRandomContactButton: UIBarButtonItem!
-    @IBOutlet weak var addCustomContactButton: UIBarButtonItem!
-    var loginButton: UIBarButtonItem!
     
+    // Button to navigate to view controller for adding contact
+    @IBOutlet weak var addCustomContactButton: UIBarButtonItem!
+    
+    // Button for logging in with account for web app sync
+    // var loginButton: UIBarButtonItem!
+    
+    // Button to sync contacts after login
+    // var syncButton: UIBarButtonItem!
+    
+    // Managed Object Context that will be used to create, edit, save, and delete contacts
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
-        self.loginButton = UIBarButtonItem.init(title: "Login", style: UIBarButtonItemStyle.Plain, target: self, action: "loginButtonTapped:")
+        // Set edit button to allow user to delete item
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
         // Set the title
         self.title = "Contacts"
+        
         // Set the footer to zero to remove extra lines from table view
         self.tableView.tableFooterView = UIView.init(frame: CGRectZero)
-        // self.navigationItem.rightBarButtonItem = nil
-        // self.navigationItem.leftBarButtonItem = self.loginButton
         }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        // Reload the table after navigating back from edit contact view controller
+        // Should actually be set as a delegate so we know specifically when we are
+        // returning to this controller from an edit controller.
         tableView.reloadData()
-        /*
-        let fetchRequest = NSFetchRequest()
-        let entityDescription = NSEntityDescription.entityForName("Contact", inManagedObjectContext: self.managedObjectContext)
-        fetchRequest.entity = entityDescription
-        do {
-            let result = try self.managedObjectContext.executeFetchRequest(fetchRequest)
-            for object in result {
-                let contact = object as! CafeChallengeContact
-                print(contact.first_name)
-            }
-        } catch {
-            let fetchError = error as NSError
-            print(fetchError)
-        }
-        */
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,34 +57,46 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // Use section count from fetched results controller
         return self.fetchedResultsController.sections?.count ?? 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        // Get number of rows in section from fetched results controller
         let sectionInfo = self.fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // Cell identifier set in storyboard because it was basic cell.
+        // A more custom cell could be subclassed and set in storyboard or set in 
+        // view did load programmatically.
         let cell = tableView.dequeueReusableCellWithIdentifier("contactCellIdentifier", forIndexPath: indexPath)
+        
+        // Send cell object and index path to helper method
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }
     
+    // Helper function that sets the cell's labels with full name and phone number
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        // Get contact object
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        
+        // Set main label text
         cell.textLabel!.text = "\(object.valueForKey("first_name")!.description) \(object.valueForKey("last_name")!)"
+        
+        // Set sub label text
         cell.detailTextLabel!.text = object.valueForKey("phone_number")!.description
+        
+        // Specify cell accessory to inform user that cell can be pressed for further
+        // interaction
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
     }
     
-    
-    // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
+        // Let user edit all items
         return true
     }
     
@@ -104,29 +108,7 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
             contact.deleteSelf(self.managedObjectContext)
             // tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
-        /*
-        else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-        */
     }
-    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
 
@@ -134,12 +116,22 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        // Not all segues have identifiers, so first check if identifier exists
         if let segueID = segue.identifier {
             switch segueID {
+            // Identifier set in storyboard
             case "editContactSegue":
+                // Get index path of row that triggered segue
                 let indexPath = self.tableView.indexPathForSelectedRow!
+                
+                // Get corresponding contact object
                 let contact = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CafeChallengeContact
+                
+                // Get edit view controller (destination)
                 let editContactViewController = segue.destinationViewController as! EditContactTableViewController
+                
+                // Prepare the controller with the contact object for editing
                 editContactViewController.prepareContactFromSegue(contact)
             default:
                 break
@@ -147,28 +139,28 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
         }
     }
     
-    
-    // MARK: - Button Selectors
-    func loginButtonTapped(sender: UIBarButtonItem) {
-    }
-    
     // MARK: - IBActions
     
+    // Button for inserting random contact
     @IBAction func randomButtonTapped(sender: UIBarButtonItem) {
         insertRandomContact()
     }
     
+    // Method that fetches, parses and inserts contact made from randomuser.me
     func insertRandomContact() {
         // Remove view if being pressed while previous fetch is taking place
         MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+        
         // Add loading bar
         let loadingNotification = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         loadingNotification.mode = MBProgressHUDMode.Indeterminate
         loadingNotification.labelText = "Fetching random user ... "
+        
         // Make JSON request, parse data and insert contact
         Alamofire.request(.GET, "https://randomuser.me/api/")
             .responseJSON { response in switch response.result {
             case .Success(let JSON):
+                // On success, parse JSON data to get desired fields
                 let response = JSON as! NSDictionary
                 let results = response.objectForKey("results") as! NSArray
                 let user = results.objectAtIndex(0) as! NSDictionary
@@ -179,14 +171,18 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
                 let email = userDict.objectForKey("email") as! String
                 let phoneNumber = userDict.objectForKey("phone") as! String
                 
+                // Create contact entity description
                 let entity = NSEntityDescription.entityForName("Contact", inManagedObjectContext: self.managedObjectContext)
+                // Create contact managed object
                 let record = CafeChallengeContact(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext)
+                // Set information for new contact
                 let infoDict: [String : String] = [
                     "first_name":firstName,
                     "last_name":lastName,
                     "email":email,
                     "phone_number":phoneNumber
                 ]
+                // Update the contact with new information and save contact
                 record .updateWithDictionary(infoDict, inManagedObjectContext: self.managedObjectContext)
                 
             case .Failure(let error):
@@ -198,9 +194,6 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
 
     }
     
-    @IBAction func customButtonTapped(sender: UIBarButtonItem) {
-    }
-    
     // MARK: - Fetched results controller
     
     var fetchedResultsController: NSFetchedResultsController {
@@ -209,20 +202,14 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
         }
         
         let fetchRequest = NSFetchRequest()
-        // Edit the entity name as appropriate.
+        
         let entity = NSEntityDescription.entityForName("Contact", inManagedObjectContext: self.managedObjectContext)
         fetchRequest.entity = entity
         
-        // Set the batch size to a suitable number.
-        fetchRequest.fetchBatchSize = 20
-        
-        // Edit the sort key as appropriate.
+        // Sort the contacts by first name
         let sortDescriptor = NSSortDescriptor(key: "first_name", ascending: true)
-        
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
         let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: "Master")
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
@@ -230,9 +217,8 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
         do {
             try _fetchedResultsController!.performFetch()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //print("Unresolved error \(error), \(error.userInfo)")
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
         
