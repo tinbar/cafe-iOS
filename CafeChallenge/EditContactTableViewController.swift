@@ -11,7 +11,7 @@ import CoreData
 
 class EditContactTableViewController: UITableViewController, UITextFieldDelegate {
     
-    // Text Field for contact's first name
+    // Text Field for contact's first name 
     var firstNameTextField: UITextField!
     
     // Text Field for contact's last name
