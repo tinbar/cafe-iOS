@@ -9,7 +9,7 @@
         <!--Contact Table View Controller-->
         <scene sceneID="qy1-uf-pfS">
             <objects>
-                <tableViewController id="foR-3D-SyC" customClass="ContactTableViewController" customModule="CafeChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ContactTableViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="foR-3D-SyC" customClass="ContactTableViewController" customModule="CafeChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="8ks-Mw-45Q">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,7 +76,7 @@
         <!--Edit Contact Table View Controller-->
         <scene sceneID="b27-VB-YPI">
             <objects>
-                <tableViewController id="EfO-lZ-OdN" customClass="EditContactTableViewController" customModule="CafeChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="editContactTableViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EfO-lZ-OdN" customClass="EditContactTableViewController" customModule="CafeChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="jwZ-Dp-PRt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

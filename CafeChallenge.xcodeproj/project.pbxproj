@@ -11,6 +11,7 @@
 		D6416CE51C65F5190052D9A5 /* CafeChallengeContact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6416CE31C65F5190052D9A5 /* CafeChallengeContact+CoreDataProperties.swift */; };
 		D6416CE61C65F5190052D9A5 /* CafeChallengeContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6416CE41C65F5190052D9A5 /* CafeChallengeContact.swift */; };
 		D6416CEA1C65FEE70052D9A5 /* EditContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6416CE91C65FEE70052D9A5 /* EditContactTableViewController.swift */; };
+		D69F0E121C6829BC004F8112 /* ContactTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F0E111C6829BC004F8112 /* ContactTests.swift */; };
 		D6D2BB5C1C65CCE000C92F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D2BB5B1C65CCE000C92F48 /* AppDelegate.swift */; };
 		D6D2BB611C65CCE000C92F48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6D2BB5F1C65CCE000C92F48 /* Main.storyboard */; };
 		D6D2BB641C65CCE000C92F48 /* CafeChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D6D2BB621C65CCE000C92F48 /* CafeChallenge.xcdatamodeld */; };
@@ -46,6 +47,7 @@
 		D6416CE41C65F5190052D9A5 /* CafeChallengeContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeChallengeContact.swift; sourceTree = "<group>"; };
 		D6416CE91C65FEE70052D9A5 /* EditContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditContactTableViewController.swift; sourceTree = "<group>"; };
 		D6734D3F1C662832002653D1 /* CafeChallenge-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CafeChallenge-Bridging-Header.h"; sourceTree = "<group>"; };
+		D69F0E111C6829BC004F8112 /* ContactTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTests.swift; sourceTree = "<group>"; };
 		D6D2BB581C65CCE000C92F48 /* CafeChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CafeChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D2BB5B1C65CCE000C92F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6D2BB601C65CCE000C92F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				D6D2BB731C65CCE000C92F48 /* CafeChallengeTests.swift */,
+				D69F0E111C6829BC004F8112 /* ContactTests.swift */,
 				D6D2BB751C65CCE000C92F48 /* Info.plist */,
 			);
 			path = CafeChallengeTests;
@@ -358,6 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D69F0E121C6829BC004F8112 /* ContactTests.swift in Sources */,
 				D6D2BB741C65CCE000C92F48 /* CafeChallengeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,6 +495,7 @@
 			baseConfigurationReference = B46E7D3E18986F3280343508 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = CafeChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Codex.CafeChallenge;
@@ -505,6 +510,7 @@
 			baseConfigurationReference = 0530DC1F4E54D03DFD19AAC7 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = CafeChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Codex.CafeChallenge;

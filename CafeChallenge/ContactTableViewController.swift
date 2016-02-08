@@ -102,7 +102,6 @@ class ContactTableViewController: UITableViewController, NSFetchedResultsControl
             // Delete the row from the data source
             let contact = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CafeChallengeContact
             contact.deleteSelf(self.managedObjectContext)
-            
             // tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
         /*
